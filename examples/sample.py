@@ -13,7 +13,8 @@ order = Entity("Orders", 712) \
             .add_attribute("Total Amount", uuid4()) \
             .add_entity_reference_attribute("Items", "Products", 1) \
             .add_entity_reference_attribute("Items", "Products", 2) \
-            .add_entity_reference_attribute("Order By", "Customers", 23)
+            .add_entity_reference_attribute("Order By", "Customers", 23) \
+            .add_automatically_translated_geopoint(52.51059, -2.17762)
 
 trackZero_client.upsert_entity(order, analytics_space_id)
 

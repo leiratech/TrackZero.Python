@@ -58,7 +58,8 @@ class TrackZero:
         This action is immediate and permanent.
         """
         if not isinstance(entity, Entity):
-            raise TypeError("Type %s is invalid for entity" % type(entity) )
+            raise TypeError("Type %s is invalid for entity" % type(entity))
+        
         res = requests.post(self.base_url + "/tracking/entities", params={"analyticsSpaceId":analytics_space_id}, data=json.dumps(entity.__dict__, default=self.json_serializer), headers={"X-API-KEY": self.api_key, "content-type":"application/json"})
         return res.status_code == 200
 
@@ -153,6 +154,22 @@ class Entity:
         else:
             self.customAttributes[attribute_name] = [{ "type":referenced_attribute_type, "id":referenced_attribute_id}]
 
+        return self
+
+    def add_automatically_translated_geopoint(self, latitude: Number, longitude: Number):
+        """Links this entity to Country / State by instructing the server to do translation. Country/State entities will be automatically created and referenced.
+
+        Parameters:
+        latitude (Number): The Latitude of the point to geo translate.
+        longitude (Number): The Longitude of the point to geo translate.
+
+        Returns:
+        self for chaining.
+        """
+        self.autoGeography = dict()
+        self.autoGeography["geoPoint"] = dict()
+        self.autoGeography["geoPoint"]["Latitude"] = latitude
+        self.autoGeography["geoPoint"]["Longitude"] = longitude
         return self
 
 class SpaceSession:
