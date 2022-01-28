@@ -177,7 +177,7 @@ class SpaceSession:
         self.is_success = is_success
         self.url = url
         self.session_key = session_key
-        self.embedded_dashboarsd_url = embedded_dashboards_url
+        self.embedded_dashboards_url = embedded_dashboards_url
         self.embedded_reports_url = embedded_reports_url
 
             
