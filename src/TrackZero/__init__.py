@@ -99,7 +99,7 @@ class TrackZero:
         res = requests.get(self.base_url + "/analyticsSpaces/session",params={"analyticsSpaceId": analytics_space_id, "ttl": ttl_seconds}, headers={"X-API-KEY": self.api_key})
         if res.status_code == 200:
             loaded = json.loads(res.text)
-            return SpaceSession(True, loaded["url"], loaded["sessionKey"], loaded["embeddedDashboarsdUrl"], loaded["embeddedReportsUrl"])
+            return SpaceSession(True, loaded["url"], loaded["sessionKey"], loaded["embeddedDashboardsUrl"], loaded["embeddedReportsUrl"])
         return SpaceSession(False, "", "", "", "")
 
 class Entity:
@@ -173,12 +173,12 @@ class Entity:
         return self
 
 class SpaceSession:
-    def __init__(self, is_success: bool, url: str, session_key: str, embedded_dashboarsd_url: str, embedded_reports_url: str) -> None:
+    def __init__(self, is_success: bool, url: str, session_key: str, embedded_dashboards_url: str, embedded_reports_url: str) -> None:
         self.is_success = is_success
         self.url = url
         self.session_key = session_key
-        self.embeddedDashboarsdUrl = embedded_dashboarsd_url
-        self.embeddedReportsUrl = embedded_reports_url
+        self.embedded_dashboarsd_url = embedded_dashboards_url
+        self.embedded_reports_url = embedded_reports_url
 
             
 
